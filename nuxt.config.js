@@ -7,10 +7,14 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  router: {
+    base: '/primer-parcial-arq-web/'
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - primer-parcial-arq-web',
-    title: 'primer-parcial-arq-web',
+    titleTemplate: '%s - Primer parcial Arq Web',
+    title: 'FP-UNA',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
