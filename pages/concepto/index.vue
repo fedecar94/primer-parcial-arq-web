@@ -7,10 +7,18 @@
       <v-card>
         <v-data-table
           :headers='headers'
-          :items='desserts'
+          :items='conceptos'
           :items-per-page='5'
+          :search="search"
           class='elevation-1'
         >
+          <template v-slot:top>
+            <v-text-field
+              v-model="search"
+              label='filtrar'
+              class="mx-4"
+            ></v-text-field>
+          </template>
           <template
             v-slot:item._acc='{ item }'
           >
@@ -39,52 +47,33 @@
 
 <script>
 export default {
-  name: 'Parametro',
+  name: 'Concepto',
   data() {
     return {
+      loading: false,
+      search: '',
       headers: [
         { text: 'ID', value: 'id' },
         { text: 'descripción de concepto', value: 'descripcion' },
-        { text: 'puntos requeridos', value: 'puntos' },
+        { text: 'puntos requeridos', value: 'puntos_requerido' },
         { text: 'Acciones', value: '_acc' }
       ],
-      desserts: [
-        {
-          id: '1234',
-          descripcion: 'vale de premio',
-          puntos: Math.floor(Math.random() * 100)
-        },
-        {
-          id: '1235',
-          descripcion: 'vale de descuento',
-          puntos: Math.floor(Math.random() * 100)
-        },
-        {
-          id: '1236',
-          descripcion: 'vale de consumición',
-          puntos: Math.floor(Math.random() * 100)
-        },
-        {
-          id: '1237',
-          descripcion: 'canje directo',
-          puntos: Math.floor(Math.random() * 100)
-        },
-        {
-          id: '1238',
-          descripcion: 'Concepto 1',
-          puntos: Math.floor(Math.random() * 100)
-        },
-        {
-          id: '1239',
-          descripcion: 'Concepto 2',
-          puntos: Math.floor(Math.random() * 100)
-        },
-        {
-          id: '1240',
-          descripcion: 'Concepto 3',
-          puntos: Math.floor(Math.random() * 100)
-        },
-      ]
+      conceptos: []
+    }
+  },
+  mounted() {
+    this.getConceptos()
+  },
+  methods: {
+    getConceptos() {
+      this.loading = true;
+      fetch('http://localhost:8000/api/concepto/')
+        .then(response => response.json())
+        .then(data => {
+          this.conceptos = data
+        }).finally(() => {
+        this.loading = false
+        })
     }
   }
 }
