@@ -53,9 +53,16 @@
           <v-btn
             color='primary'
             nuxt
-            to='/inspire'
+            to='/uso/add'
           >
             Agregar
+          </v-btn>
+          <v-btn
+            color='secondary'
+            nuxt
+            to='/uso/calc'
+          >
+            Calcular
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -77,10 +84,10 @@ export default {
       ],
       headers: [
         { text: 'ID', value: 'id' },
-        { text: 'Cliente ID', value: 'cliente.id' },
+        { text: 'Cliente ID', value: 'cliente_obj.id' },
         { text: 'Puntaje utilizado', value: 'p_utilizado' },
         { text: 'Fecha', value: 'fecha' },
-        { text: 'Concepto de uso de punto', value: 'concepto.descripcion' },
+        { text: 'Concepto de uso de punto', value: 'concepto_obj.descripcion' },
         { text: '', value: 'data-table-expand' }
       ],
       usos: []
